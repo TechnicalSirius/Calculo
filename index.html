@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculo | Digital Calculator Solution - By Adarsh Tiwari</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="vanta-bg" class="background-overlay"></div>
+  <div class="app-wrapper">
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="logo">
+          <img src="assets/logo.png" alt="Calculator Logo" class="logo-image" />
+        </div>
+        </div>
+      <div class="header-actions">
+        <button id="theme-toggle" class="toggle-btn" type="button" aria-label="Toggle dark light theme">🌙</button>
+        <button id="advanced-toggle" class="toggle-btn advanced-btn" type="button" aria-expanded="false">⚙️ Advanced</button>
+      </div>
+    </header>
+
+    <div id="drawer-overlay" class="drawer-overlay hidden" aria-hidden="true"></div>
+    <section class="advanced-panel drawer-panel" id="advanced-panel" aria-hidden="true">
+      <div class="advanced-panel-content">
+        <div class="drawer-header">
+          <div>
+            <p class="advanced-panel-tag">Advanced tools</p>
+            <h2>Smart calculator hub</h2>
+          </div>
+          <button id="drawer-close" class="drawer-close" type="button" aria-label="Close advanced panel">✕</button>
+        </div>
+
+        <div class="drawer-search">
+          <input id="drawer-search-input" class="drawer-search-input" type="search" placeholder="Search tools..." aria-label="Search advanced tools" />
+        </div>
+
+        <div class="drawer-sections">
+          <section class="drawer-section open" data-section="daily">
+            <button class="section-toggle" type="button" aria-expanded="true">Daily Life Tools</button>
+            <div class="drawer-section-body open">
+              <button type="button" class="advanced-item" data-tool="age"><span class="advanced-item-icon">🎂</span><span class="advanced-item-label">Age Calculator</span></button>
+              <button type="button" class="advanced-item" data-tool="currency"><span class="advanced-item-icon">💱</span><span class="advanced-item-label">Currency Converter</span></button>
+              <button type="button" class="advanced-item" data-tool="bmi"><span class="advanced-item-icon">⚖️</span><span class="advanced-item-label">BMI Calculator</span></button>
+              <button type="button" class="advanced-item" data-tool="discount"><span class="advanced-item-icon">💸</span><span class="advanced-item-label">Discount & Tax</span></button>
+              <button type="button" class="advanced-item" data-tool="percentage"><span class="advanced-item-icon">📊</span><span class="advanced-item-label">Percentage</span></button>
+              <button type="button" class="advanced-item" data-tool="date"><span class="advanced-item-icon">📅</span><span class="advanced-item-label">Date Tools</span></button>
+            </div>
+          </section>
+
+          <section class="drawer-section open" data-section="technical">
+            <button class="section-toggle" type="button" aria-expanded="true">Technical & Scientific</button>
+            <div class="drawer-section-body open">
+              <button type="button" class="advanced-item" data-tool="trig"><span class="advanced-item-icon">📐</span><span class="advanced-item-label">Trigonometry</span></button>
+              <button type="button" class="advanced-item" data-tool="logs"><span class="advanced-item-icon">🧠</span><span class="advanced-item-label">Logarithms</span></button>
+              <button type="button" class="advanced-item" data-tool="powers"><span class="advanced-item-icon">ⁿ</span><span class="advanced-item-label">Powers & Roots</span></button>
+              <button type="button" class="advanced-item" data-tool="permutations"><span class="advanced-item-icon">🔣</span><span class="advanced-item-label">nPr / nCr</span></button>
+            </div>
+          </section>
+
+          <section class="drawer-section open" data-section="specialized">
+            <button class="section-toggle" type="button" aria-expanded="true">Specialized Tools</button>
+            <div class="drawer-section-body open">
+              <button type="button" class="advanced-item" data-tool="equation"><span class="advanced-item-icon">🧮</span><span class="advanced-item-label">Equation Solver</span></button>
+              <button type="button" class="advanced-item" data-tool="unit"><span class="advanced-item-icon">📏</span><span class="advanced-item-label">Unit Converter</span></button>
+              <button type="button" class="advanced-item" data-tool="storage"><span class="advanced-item-icon">💾</span><span class="advanced-item-label">Data Storage</span></button>
+              <button type="button" class="advanced-item" data-tool="numbers"><span class="advanced-item-icon">🔢</span><span class="advanced-item-label">Number System</span></button>
+            </div>
+          </section>
+        </div>
+
+        <div class="advanced-panel-actions">
+          <span id="selected-tool-status" class="selected-tool-status">Selected tool: none</span>
+          <div class="advanced-action-buttons">
+            <button id="tool-ready" class="toggle-btn ready-btn" type="button">Ready</button>
+            <button id="tool-reset" class="toggle-btn reset-btn" type="button">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-layout">
+      <section class="calculator-app">
+        <div class="calculator-shell">
+        <div id="tool-container" class="tool-container hidden"></div>
+        <div class="calculator-card">
+          <div class="screen-panel">
+            <div class="screen-preview">0</div>
+            <div class="screen-display">0</div>
+          </div>
+            <div class="button-grid">
+              <button data-value="clear" class="button action">AC</button>
+              <button data-value="delete" class="button action">⌫</button>
+              <button data-value="percent" class="button action">%</button>
+              <button data-value="/" class="button operator">÷</button>
+
+              <button data-value="7" class="button">7</button>
+              <button data-value="8" class="button">8</button>
+              <button data-value="9" class="button">9</button>
+              <button data-value="*" class="button operator">×</button>
+
+              <button data-value="4" class="button">4</button>
+              <button data-value="5" class="button">5</button>
+              <button data-value="6" class="button">6</button>
+              <button data-value="-" class="button operator">−</button>
+
+              <button data-value="1" class="button">1</button>
+              <button data-value="2" class="button">2</button>
+              <button data-value="3" class="button">3</button>
+              <button data-value="+" class="button operator">+</button>
+
+              <button data-value="0" class="button wide">0</button>
+              <button data-value="." class="button">.</button>
+              <button data-value="equals" class="button equals">=</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="history-panel">
+        <div class="history-header">
+          <div>
+            <span class="history-title">History</span>
+            <p class="history-subtitle">Recent calculations</p>
+          </div>
+          <button id="clear-history" class="history-clear" type="button">Clear all</button>
+        </div>
+        <div class="history-hint">Tap any entry to load it again.</div>
+        <div id="history-list" class="history-list">
+          <div class="history-empty">No history yet. Start with a calculation.</div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+     <footer class="footer">
+        <div class="container">
+                <p class="copyright">
+                    <i class="far fa-copyright"></i> 2026 <b>Adarsh Tiwari</b> | Technical Sirius. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+  <script src="script.js"></script>
+</body>
+</html>
