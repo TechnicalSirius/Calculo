@@ -3,7 +3,6 @@ const displayElement = document.querySelector('.screen-display');
 const buttons = document.querySelectorAll('[data-value]');
 const historyListElement = document.getElementById('history-list');
 const clearHistoryBtn = document.getElementById('clear-history');
-const themeToggleBtn = document.getElementById('theme-toggle');
 const advancedToggleBtn = document.getElementById('advanced-toggle');
 const advancedPanel = document.getElementById('advanced-panel');
 const advancedTabs = document.querySelectorAll('.advanced-tab');
@@ -15,6 +14,7 @@ const selectedToolStatus = document.getElementById('selected-tool-status');
 const calculatorCard = document.querySelector('.calculator-card');
 const historyTitleElement = document.querySelector('.history-title');
 const historySubtitleElement = document.querySelector('.history-subtitle');
+const body = document.body;
 
 let expression = '';
 let standardHistory = [];
@@ -78,6 +78,30 @@ const currencyRates = {
   MAD: 10.4, DZD: 139, TND: 3.1, ISK: 135, LKR: 324, OMR: 0.38,
   BHD: 0.38, HUF: 336, CZK: 23.1, RON: 4.3,
 };
+
+const lightModeBtn = document.getElementById('light-mode-btn');
+const darkModeBtn = document.getElementById('dark-mode-btn');
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.body.classList.remove('light-mode', 'dark-mode');
+  document.body.classList.add(savedTheme);
+}
+
+// Sun button = light mode
+lightModeBtn.addEventListener('click', () => {
+  document.body.classList.remove('dark-mode');
+  document.body.classList.add('light-mode');
+  localStorage.setItem('theme', 'light-mode');
+});
+
+// Moon button = dark mode
+darkModeBtn.addEventListener('click', () => {
+  document.body.classList.remove('light-mode');
+  document.body.classList.add('dark-mode');
+  localStorage.setItem('theme', 'dark-mode');
+});
 
 function updateSelectedToolStatus() {
   const name = selectedTool ? (toolLabels[selectedTool] || selectedTool) : 'none';
@@ -1582,16 +1606,6 @@ function clearHistory() {
   renderHistory();
 }
 
-function setTheme(isLight) {
-  document.body.classList.toggle('light-mode', isLight);
-  themeToggleBtn.textContent = isLight ? 'Dark mode' : 'Light mode';
-}
-
-function toggleTheme() {
-  const isLight = document.body.classList.toggle('light-mode');
-  themeToggleBtn.textContent = isLight ? 'Dark mode' : 'Light mode';
-}
-
 function safeTokenize(input) {
   const tokens = [];
   let current = '';
@@ -1772,7 +1786,6 @@ buttons.forEach((button) => {
 });
 
 clearHistoryBtn.addEventListener('click', clearHistory);
-themeToggleBtn.addEventListener('click', toggleTheme);
 advancedToggleBtn?.addEventListener('click', openAdvancedPanel);
 
 // Search functionality for advanced tools
@@ -1855,7 +1868,6 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('load', () => {
   loadHistoryData();
   setHistoryMode('Standard');
-  setTheme(false);
   updateSelectedToolStatus();
   updateSelectedToolStatus();
 });
